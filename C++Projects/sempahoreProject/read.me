@@ -1,0 +1,44 @@
+Project 2 - Airport & Planes Project
+
+Name: Max Hoffman
+
+Special Details: Made on Windows 10 in Visual Studio Code. I also provided my make file I used in the .zip folder. complile with the command if using my make file : ./proj2 <passenger number> <tour number>
+
+Known Bugs: None that I have seen so far.
+
+Overview: There were three main challenges that took up the majority of this project. The first was understanding that after creating a semaphore 
+you can just access it using semget(). After creating the semaphores correctly another challenge was figuring out my semaphore value for the runway semaphore. 
+The last challenge was trying to protect the passenger resource. I originally was trying to protect it using a binary system like how the runway is protected. 
+After your hint in class about how semaphores can be set to any number I descided to set it to the total number of passengers. This worked better but I still 
+had issues with getting it to even load the passengers. After your help narrowing the issue to my wait command and seeing that I had my sem_num wrong that fixed this issue. 
+Overall I spent almost two weeks on this project and I am glad I started early since there were many challenges and bumps along the way.
+
+
+Questions 1-5:
+
+1. Try running your program with only 11 passengers. What happens? Why?
+	No planes will take off since the 11 passengers are split between all 8 planes. Each plane needs 12 
+passengers to take off, so the planes will all be waiting for their 12 passengers to enter. With only an input of 11, this will never happen.
+
+2. Try running your program with 12 passengers. What happens? Why?
+	The same thing happens as it did in #1, all planes are stuck waiting for 12 total passengers. 
+
+3. Try running your program with 50 passengers and 100 tours. What happens? Why?
+	The planes fill up with passengers but do not make it to 12 passengers and therefore cannot launch. I ran my program around 30 times and 
+only saw one time where a planes passengers were 10. There might be a very small chance one plane could get 12 passengers but it would then
+be up to chance again if another plane would be able to launch since they are added randomly to whichever plane was waiting first. Since the planes
+would need to complete 100 tours I will confidently say that 100 tours would not be able to be reached.
+
+4. Try running your program with 100 passengers and 20 tours. What happens? Why?
+	All planes are able to launch since each plane requires 12 passengers and there are 8 planes that means any number 96 and over will 
+make all planes launch. The planes then taxi their way to the runway and take off in order of arrival, one at a time. After touring and landing they 
+come taxi back and deplane returning those passengers to the pool of available passengers. When one of the planes reaches the number 20 total tours
+between all of the planes then that plane's status is set to DONE and its thread ends. Each plane then states it is DONE after making its way back 
+to the airport and deplaning. The total number of tours I got at the end was: 27.
+
+5. What is the minimum number of passengers that will guarantee avoidance of
+deadlock? Why?
+
+	I initally tested every number from 65 and up I realized after testing about 20 different numbers by hand that the minimum is one plane having 12 passengers 
+while the rest have 11 this comes out to a total number of 89. If you try with 88 it will work most of the time but there is still a chance that all planes will end up with 11 passengers each.
+This is because in order for a plane to finish boarding it must have 12 passengers and with a total of 89 passengers there will always be at least 1 plane that fills up to 12 passengers.
