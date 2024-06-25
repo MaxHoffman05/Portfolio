@@ -94,4 +94,9 @@
 
 > For my Senior Project I worked in a group to create TailTracker. TailTracker is a system for viewing and creating upcoming dog agility competitions. If you would like to take a look, I've included a link below. I worked on the back-end python scripts that control the scheduler for the admin-side of the page. I also worked on the python flask code that runs our server and API routes.
 
+**AIFinalProject - Language - Python :**
+<br/>
+
+> This was a group project I made in my Artificial intelligence class at Lindenwood. We had a lot of challenges with the project and ended up not completing all of what we wanted to get done. We modified a machine learning python library: YOLOv5 to pull the names of objects recognized and send them to the Misty Robot. We were tasked with working with the Misty Robots and were the only group in the class that made a project not constrained by the Misty Robot Block coding. We feel like we accomplished a lot given the unfamiliarity with the robot and machine learning as a whole. More detailed description can be found in the project's readme.
+
 [Tailtracker link](https://tailtracker.ddns.net/login)
