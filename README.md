@@ -1,6 +1,6 @@
 # Max Hoffman's Portfolio
 
-[LinkedIn page](https://www.linkedin.com/in/max-hoffman-543714312/?trk=opento_sprofile_topcard)
+[LinkedIn page](https://www.linkedin.com/in/max-hoffman-543714312/?trk=opento_sprofile_topcard) :desktop_computer:
 
 ## Coding Experience
 
@@ -12,9 +12,12 @@
         - HTML (2 yrs experience)
         - CSS (2 yrs experience)
         - R
-        - Machine Learning experience using python
+        - Machine Learning experience using python libraries
+        - Experience modifying and using the YOLOv5 python libary for a project
 
     Experience with Linux and Windows
+
+    Currently learning JavaScript!
 
 ## Brief Explanation of Each Project:
 
@@ -99,4 +102,5 @@
 
 > This was a group project I made in my Artificial intelligence class at Lindenwood. We had a lot of challenges with the project and ended up not completing all of what we wanted to get done. We modified a machine learning python library: YOLOv5 to pull the names of objects recognized and send them to the Misty Robot. We were tasked with working with the Misty Robots and were the only group in the class that made a project not constrained by the Misty Robot Block coding. We feel like we accomplished a lot given the unfamiliarity with the robot and machine learning as a whole. More detailed description can be found in the project's readme.
 
-[Tailtracker link](https://tailtracker.ddns.net/login)
+[Tailtracker link](https://tailtracker.ddns.net/login) :paw_prints:
+(Currently not up at the moment)
