@@ -1,0 +1,146 @@
+---
+title: "HoffmanProject"
+author: "Max Hoffman"
+date: "2023-11-19"
+output: word_document
+---
+
+
+```{r}
+library(tidyverse)
+library(socviz)
+library(ggplot2)
+library(ISLR)
+library(MASS)
+```
+
+
+# Final Project - I chose to look at the data set gss_lon, and various relationships that I found would be interesting to see if my hypotheses were correct. My goal for this project is to look at some well known relationships in society that we might believe and possibly dissprove them.
+
+If you are interested in the data set below is a summary and the link to what each variable is.
+```{r}
+head(gss_lon)
+sample_n(gss_lon, 10)
+summary(gss_lon)
+
+#Link to explanation of data set: https://www.rdocumentation.org/packages/socviz/versions/1.2/topics/gss_lon
+
+```
+# Exploration 1 - Marital Status vs. Happiness
+
+I wanted to explore to see if there is a relationship between marital status and the happy column in the data. I made a graph below which represents that and also splits the data by sex. I did not have a hypotheses for this relationship just that I knew there would be some sort but I could not figure out if it would be positive or negative.
+
+```{r}
+
+graph1 <- na.omit(gss_lon)#get rid of the NA's
+ggplot(data = graph1, mapping = aes(x = marital, fill = happy)) + geom_col(mapping = aes(y = happy)) + facet_grid(sex ~ happy)
+
+
+
+```
+From the graph we can see that it seems that the same relationship exists if you are male or female. There is a positive relationship between marital status and the happy data field recorded. It looks like if you are married you are more likely to be pretty happy or fall into the very happy graphs, regardless if you are male or female. I think this is very interesting, I did expect some sort of a relationship but it makes sense that there would be some sort of a positive relationship between marital status and being happy. Another thing to point out is that the middle column in each graph represents people who are divorced. It seems there is more people divorced that are happy than are not too happy. I think I would need more data to say if there is a relationship between people who are divorced and happiness.
+
+
+# Exploration 2 - Total family income vs. political party affiliation. 
+
+  My hypotheses for this relationship was that there would be a positive relationship between income and party affiliation. I hypothisize that if you are a democrat you are more likely to make more money.
+```{r}
+graph2 <- na.omit(gss_lon)
+ggplot(data = graph2, mapping = aes(x = income16, fill = partyid)) + geom_bar(position = "stack") + coord_flip() #flip the axis so we can read it better
+
+
+graph2L <- lm(income16 ~ partyid, data = graph2)
+graph2L
+
+
+
+```
+  Based off of the graph you can see that my hypotheses was confirmed. If you are a democrat you do make more money compared to a republican. This could also be due to where the data was surveyed since the data could be skewed towards a specific party over the other. After seeing this I descided to take my exploration further by checking to see if liberals get a higher degree than other political parties. I feel like since we have this result from this relationship than there must be the same relationship between highest degree and political party affiliation. 
+
+
+
+# Exploration 3 - Highest degree vs political party affiliation
+
+I chose to see if there is a relationship between highest degree and political party affiliation. My hypotheses is that the more liberal you are the higher degree you will have. I feel like this is a good assumption based off of my last exploration.
+```{r}
+graph3 <- na.omit(gss_lon)
+
+ggplot(data = graph3, mapping = aes(x = degree, fill = partyid)) + geom_bar()#a stacked bar chart
+
+
+graph3L <- lm(degree ~ partyid, data = graph3)
+graph3L
+
+
+
+```
+
+  This did suprise me, there seems to be a very small relationship between party and degree. Now you can also see that less republicans get higher degrees but that is also the same for democrats. I think this shows that in the last exploration I did that the data could be skewed based off of where it was taken since here there seems to not be a significant relationship between party affiliation and degree. If anything this shows that less people actually go to college and even less go to graduate school. It does seem that more liberals do go to graduate school but I may need more data to say that concretely. After this I descided to explore number of siblings compared to income.
+
+
+# Exploration 4 - Number of siblings vs income
+
+I chose to do this because I figured that the more siblings you had the less your income would end up being as an adult. The reason for this was that I would think families with more siblings would have a hard time sending all their children off to college. So my hypotheses would be that the less siblings you had growing up the less your overall income would be and vice-versa.
+
+```{r}
+graph4 <- na.omit(gss_lon)
+
+ggplot(data = graph4, mapping = aes(x = income16, fill = siblings)) + geom_bar()
+
+#better visualization on what I am talking about in the paragraph below
+ggplot(data = graph4, mapping = aes(x = income16, fill = siblings)) + geom_bar() + coord_polar()
+
+graph4L <- lm(income16 ~ siblings, data = graph4)#We cannot preform linear regression since these fields are not numbers
+graph4L
+
+
+
+
+```
+
+  As you can see there is a relationship between number of siblings and income. What did suprise me is how many with 6+ siblings still make a lot of money. As you can see though the people who had 1 or 2 siblings does increase as income increases. An explanation of this could be that there are many richer families that have only 1 child and this could be skewing the data this way. Or maybe middle class families that have 1 or 2 children are able to support them in college and thus help them find higher-income jobs.
+  
+  
+# Exploration 5 - Age vs Income
+
+For the last exploration I wanted to do a linear regression analysis of age vs income. My hypotheses is that there will be a positive increase given that the older you are the more money you will probably make
+
+My hypotheses is 
+
+```{r}
+
+graph5 <- na.omit(gss_lon)
+graph5L <- lm(age ~ income16, data = graph5)
+graph5L
+
+ggplot(graph5L) + geom_point(mapping = aes(x = age, y = income16)) + geom_smooth(aes(x = age, y = income16), method = "lm") + coord_quickmap()
+summary(graph5L)
+
+
+graph5L <- lm(age ~ income16 + sex, data = graph5)
+summary(graph5L) #you can see here the R squared value is negative indicating there is no relationship
+#you can also tell that by looking at the jumbled graph
+
+ggplot(graph5L, mapping = aes(x = age, y = income16)) + geom_boxplot()#you can see that the average for each group stays around 50 years old so there is no real correlation in the data
+
+
+#linear model of age vs income plus if they support legalization of marijuana
+graph5LL <- lm(age ~ income16 + grass, data = graph5)
+summary(graph5LL)
+ggplot(graph5LL) + geom_point(mapping = aes(x = age, y = income16)) + facet_wrap(~ grass)
+#You can see there is no correlation between the variables
+
+
+
+
+
+```
+Based off of this linear regression you can see there is no relationship between age and income. You can also see how well the data was collected since there is almost an even spread between all ages and income. I thought there would be a positive relation between them but there is not. Even after trying to add in the sex variable there is still no relation. You can also see in the summary of both datasets that they both have a negative R-Squared value which indicated no relation. The number is also very small.
+
+
+# Conclusion:
+
+Over the course of this project I have learned more about the U.S. and a couple of my original thoughts have been disproved based on this data. A couple have also been strengthened based off of my findings like how there is a relation between party affiliation and income and number of siblings and income. 
+I think my project gives valuable insight into our society and how we function in our day to day lives. I hope you have learned something new based off of my project, like I have.
+
+
