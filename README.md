@@ -104,3 +104,10 @@
 
 [Tailtracker link](https://tailtracker.ddns.net/login) :paw_prints:
 (Currently not up at the moment)
+
+### - Misc Projects
+
+**DataAnalysisProject - Language - R :**
+<br/>
+
+> This project was my final project in my Data Analysis class with R. I enjoyed this final project since we were free to explore any dataset and its relationships. I enjoyed testing hypotheses and creating the graphs representing the relationships in the data.
